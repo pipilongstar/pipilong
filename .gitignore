@@ -1,0 +1,33 @@
+### Java template
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# idea
+.idea/
+*.iml
+
+*velocity.log*
+
+#webapp/
+src/main/webapp/element-ui/
+src/main/webapp/js/
+
+#target
+target/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*

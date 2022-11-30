@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pipilong.mapper.BrandMapper">
+
+    <resultMap id="map" type="com.pipilong.pojo.Brand">
+        <result property="brandName" column="brand_name"/>
+        <result property="companyName" column="company_name"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="map">
+        select * from tb_brand
+        <where>
+            <if test="brand.brandName!=null and brand.brandName!=''">
+                 brand_name like concat('%',#{brand.brandName},'%')
+            </if>
+            <if test="brand.companyName!=null and brand.companyName!=''">
+                and company_name like concat('%',#{brand.companyName},'%')
+            </if>
+            <if test="brand.status!=null">
+                and status=#{brand.status}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectById" resultMap="map">
+        select * from tb_brand where id = #{id};
+    </select>
+
+    <select id="selectAllCount" resultType="java.lang.Integer" >
+        select count(*) from tb_brand;
+    </select>
+
+    <select id="searchSelectCount" resultType="java.lang.Integer">
+        select count(*) from tb_brand
+        <where>
+            <if test="brand.brandName!=null and brand.brandName!=''">
+                brand_name like concat('%',#{brand.brandName},'%')
+            </if>
+            <if test="brand.companyName!=null and brand.companyName!=''">
+                and company_name like concat('%',#{brand.companyName},'%')
+            </if>
+            <if test="brand.status!=null">
+                and status=#{brand.status}
+            </if>
+        </where>
+    </select>
+
+    <insert id="add">
+        insert into tb_brand values (null,#{brandName},#{companyName},#{ordered},#{description},#{status})
+    </insert>
+
+    <delete id="deleteByIds">
+        delete from tb_brand where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+</mapper>
+
+
